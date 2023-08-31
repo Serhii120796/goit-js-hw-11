@@ -16,7 +16,7 @@ form.addEventListener('submit', (evt) => {
   evt.preventDefault();
   list.innerHTML = '';
   page = 1;
-  addImages(evt);
+  addImages();
 });
 
 button.addEventListener('click', () => {
