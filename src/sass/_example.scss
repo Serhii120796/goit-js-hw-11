@@ -1,7 +1,18 @@
+:root {
+  /* Color */
+  --blue: #0931a7;
+  --light-blue: #404bbf;
+}
+
 .search-form {
   padding: 8px;
-  background-color: #0931a7;
+  background-color: var(--light-blue);
   text-align: center;
+}
+
+.search-form:hover,
+.search-form:focus {
+  background-color: var(--blue);
 }
 
 .gallery {
@@ -34,4 +45,26 @@
   border-bottom: 0 1px 1px 1px solid #e7e9fc;
   box-shadow: 0px 2px 1px rgba(46, 47, 66, 0.08),
     0px 1px 1px rgba(46, 47, 66, 0.16), 0px 1px 6px rgba(46, 47, 66, 0.08);
+}
+
+.load-more {
+  display: block;
+  margin: 16px auto;
+  padding: 8px 24px;
+  color: #ffffff;
+  background-color: var(--light-blue);
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.load-more:hover,
+.load-more:focus {
+  background-color: var(--blue);
+}
+
+.hidden {
+  display: none;
 }
