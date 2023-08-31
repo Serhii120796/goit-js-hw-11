@@ -10,13 +10,14 @@ const form = document.querySelector('.search-form');
 const list = document.querySelector('.gallery');
 const button = document.querySelector('.load-more');
 
+let page;
+
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
   list.innerHTML = '';
+  page = 1;
   addImages(evt);
 });
-
-let page = 1;
 
 button.addEventListener('click', () => {
   page += 1;
