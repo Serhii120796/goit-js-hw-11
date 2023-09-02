@@ -39,6 +39,10 @@ function addImages() {
 
       list.insertAdjacentHTML('beforeend', createMarcup(response.data));
 
+      if (page === 1) {
+        Notify.success(`Hooray! We found ${response.data.totalHits} images.`);
+      }
+
       if (response.data.totalHits <= page * per_page) {
         button.classList.add('hidden');
         Notify.failure(
