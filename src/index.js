@@ -30,19 +30,25 @@ button.addEventListener('click', () => {
 function addImages() {
   fetchImages(input.value, page, per_page)
     .then(response => {
-      if (response.data.hits.length) {
-        list.insertAdjacentHTML('beforeend', createMarcup(response.data));
-
-        response.data.totalHits > page * per_page
-          ? button.classList.remove('hidden')
-          : Notify.failure(
-              "We're sorry, but you've reached the end of search results."
-            );
-      } else {
+      if (!response.data.hits.length) {
         Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
         );
+        return;
       }
+
+      list.insertAdjacentHTML('beforeend', createMarcup(response.data));
+
+      if (response.data.totalHits <= page * per_page) {
+        button.classList.add('hidden');
+        Notify.failure(
+          "We're sorry, but you've reached the end of search results."
+        );
+        return;
+      }
+
+      button.classList.remove('hidden');
+
       console.log(response.data);
     })
     .catch(error => console.log(error));
