@@ -9,11 +9,14 @@ Notify.init({
 const form = document.querySelector('.search-form');
 const list = document.querySelector('.gallery');
 const button = document.querySelector('.load-more');
+const { searchQuery: input } = form.elements;
 
 let page;
+const per_page = 40;
 
-form.addEventListener('submit', (evt) => {
+form.addEventListener('submit', evt => {
   evt.preventDefault();
+  button.classList.add('hidden');
   list.innerHTML = '';
   page = 1;
   addImages();
@@ -22,25 +25,24 @@ form.addEventListener('submit', (evt) => {
 button.addEventListener('click', () => {
   page += 1;
   addImages();
-  
 });
-const { searchQuery: input } = form.elements;
 
 function addImages() {
-  
-
-  fetchImages(input.value, page)
+  fetchImages(input.value, page, per_page)
     .then(response => {
       if (response.data.hits.length) {
         list.insertAdjacentHTML('beforeend', createMarcup(response.data));
-        button.classList.remove('hidden');
-        
+
+        response.data.totalHits > page * per_page
+          ? button.classList.remove('hidden')
+          : Notify.failure(
+              "We're sorry, but you've reached the end of search results."
+            );
       } else {
         Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
         );
       }
-
       console.log(response.data);
     })
     .catch(error => console.log(error));
