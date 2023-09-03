@@ -49,8 +49,6 @@ function addImages() {
 
       if (page === 1) {
         Notify.success(`Hooray! We found ${response.data.totalHits} images.`);
-        const { height: cardHeight } =
-          list.firstElementChild.getBoundingClientRect();
       } else {
         window.scrollBy({
           top: cardHeight * 2,
@@ -72,5 +70,3 @@ function addImages() {
     })
     .catch(error => console.log(error));
 }
-
-
