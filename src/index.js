@@ -1,4 +1,3 @@
-import { fetchImages } from './js/pixabay-api.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 Notify.init({
   position: 'center-center',
@@ -6,6 +5,9 @@ Notify.init({
 });
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+
+import { fetchImages } from './js/pixabay-api.js';
+import { createMarkup } from './js/createMarkup.js';
 const lightbox = new SimpleLightbox('.gallery a');
 
 const form = document.querySelector('.search-form');
@@ -39,7 +41,7 @@ function addImages() {
         return;
       }
 
-      list.insertAdjacentHTML('beforeend', createMarcup(response.data));
+      list.insertAdjacentHTML('beforeend', createMarkup(response.data));
       lightbox.refresh();
 
       const { height: cardHeight } =
@@ -71,37 +73,4 @@ function addImages() {
     .catch(error => console.log(error));
 }
 
-function createMarcup({ hits }) {
-  return hits
-    .map(
-      ({
-        webformatURL,
-        largeImageURL,
-        tags,
-        likes,
-        views,
-        comments,
-        downloads,
-      }) =>
-        `<div class="photo-card">
-        <a href="${largeImageURL}" sourceAttr class="card-link">
-  <img src="${webformatURL}" alt="${tags}" class="gallery-img" loading="lazy" />
-  <div class="info">
-    <p class="info-item">
-      <b>Likes</b> ${likes}
-    </p>
-    <p class="info-item">
-      <b>Views</b> ${views}
-    </p>
-    <p class="info-item">
-      <b>Comments</b> ${comments}
-    </p>
-    <p class="info-item">
-      <b>Downloads</b> ${downloads}
-    </p>
-  </div>
-</a>
-</div>`
-    )
-    .join('');
-}
+
