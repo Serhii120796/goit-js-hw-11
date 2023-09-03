@@ -5,6 +5,9 @@ Notify.init({
   backOverlay: true,
   clickToClose: true,
 });
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
+const lightbox = new SimpleLightbox('.gallery a');
 
 const form = document.querySelector('.search-form');
 const list = document.querySelector('.gallery');
@@ -38,6 +41,7 @@ function addImages() {
       }
 
       list.insertAdjacentHTML('beforeend', createMarcup(response.data));
+      lightbox.refresh();
 
       if (page === 1) {
         Notify.success(`Hooray! We found ${response.data.totalHits} images.`);
@@ -71,6 +75,7 @@ function createMarcup({ hits }) {
         downloads,
       }) =>
         `<div class="photo-card">
+        <a href="${largeImageURL}" sourceAttr class="card-link">
   <img src="${webformatURL}" alt="${tags}" class="gallery-img" loading="lazy" />
   <div class="info">
     <p class="info-item">
@@ -86,7 +91,11 @@ function createMarcup({ hits }) {
       <b>Downloads</b> ${downloads}
     </p>
   </div>
+</a>
 </div>`
     )
     .join('');
 }
+
+
+

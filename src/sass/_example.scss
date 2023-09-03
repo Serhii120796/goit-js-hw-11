@@ -31,9 +31,14 @@
   margin-left: auto;
 }
 
-.photo-card {
+.card-link{
   display: flex;
-  flex-direction: column;
+    flex-direction: column;
+width: 100%;
+text-decoration: none;
+}
+
+.photo-card {
   width: calc((100% - 30px) / 4);
 }
 
