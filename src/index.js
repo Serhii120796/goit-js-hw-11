@@ -2,11 +2,10 @@ import { fetchImages } from './js/pixabay-api.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 Notify.init({
   position: 'center-center',
-  backOverlay: true,
   clickToClose: true,
 });
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 const lightbox = new SimpleLightbox('.gallery a');
 
 const form = document.querySelector('.search-form');
@@ -43,8 +42,18 @@ function addImages() {
       list.insertAdjacentHTML('beforeend', createMarcup(response.data));
       lightbox.refresh();
 
+      const { height: cardHeight } =
+        list.firstElementChild.getBoundingClientRect();
+
       if (page === 1) {
         Notify.success(`Hooray! We found ${response.data.totalHits} images.`);
+        const { height: cardHeight } =
+          list.firstElementChild.getBoundingClientRect();
+      } else {
+        window.scrollBy({
+          top: cardHeight * 2,
+          behavior: 'smooth',
+        });
       }
 
       if (response.data.totalHits <= page * per_page) {
@@ -96,6 +105,3 @@ function createMarcup({ hits }) {
     )
     .join('');
 }
-
-
-
