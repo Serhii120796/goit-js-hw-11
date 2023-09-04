@@ -1,8 +1,4 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-Notify.init({
-  position: 'center-center',
-  clickToClose: true,
-});
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { fetchImages } from './js/pixabay-api.js';
