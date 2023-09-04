@@ -11,8 +11,8 @@ function fetchImages(searchData, page, per_page) {
     image_type: "photo",
     orientation: "horizontal",
     safesearch: true,
-    per_page: per_page,
-    page: page,
+    per_page,
+    page,
   });
 
     return axios.get(`${BASE_URL}?${params}`);
