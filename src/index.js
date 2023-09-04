@@ -5,15 +5,15 @@ Notify.init({
 });
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-
 import { fetchImages } from './js/pixabay-api.js';
 import { createMarkup } from './js/createMarkup.js';
-const lightbox = new SimpleLightbox('.gallery a');
 
 const form = document.querySelector('.search-form');
 const list = document.querySelector('.gallery');
 const button = document.querySelector('.load-more');
 const { searchQuery: input } = form.elements;
+
+const lightbox = new SimpleLightbox('.gallery a');
 
 let page;
 const per_page = 40;
@@ -65,8 +65,6 @@ function addImages() {
       }
 
       button.classList.remove('hidden');
-
-      console.log(response.data);
     })
     .catch(error => console.log(error));
 }
